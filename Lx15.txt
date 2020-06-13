@@ -1,0 +1,80 @@
+C#企业级开发技术练习15答题卡
+
+班级：     信息管理2班
+姓名：     赖泳浩
+学号：     20190206210
+
+注：请将答案放置在序号下方。*/
+
+（一）
+using System;
+using System.Threading.Tasks;
+
+namespace ConsoleApp27
+{
+    class Program
+    {
+        static Task<decimal> Sale(decimal price,int num)
+        {
+            var date = (price, num);
+            Task<decimal> tk = new Task<decimal>(t =>
+            {
+                var (p, n) = ((decimal, int))t;
+                return p * n;
+            }, date);
+            tk.Start();return tk;
+        }
+        //按题目要求修改下行代码
+
+        static async void Calc(decimal price,int num)
+        {
+            //按题目要求修改下行代码
+            decimal r = await Sale(price,num);
+            Console.WriteLine($"单价:{price},数量{num},商品金额{r}");
+        }
+        static void Main(string[] args)
+        {
+            decimal price = 20.88m;
+            int num = 5;
+            Calc(price, num);
+            Console.WriteLine($"正在计算单价:{price}`数量:{num}的商品金额");
+        }
+    }
+}
+
+
+
+（二）
+
+
+
+（三）
+using System;
+using System.Reflection;
+
+namespace ConsoleApp29
+{
+    public class Student
+    {
+        public string name;
+        public static int num;
+        public Student() { num++; }
+        public DateTime birth { get; set; }
+        public int age() { return DateTime.Now.Year - birth.Year; }
+        public static int getCount() { return num; }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //按要求修改下行代码
+            foreach (MemberInfo member in typeof(Student).GetMembers())
+            {
+                //按题目要求修改下行代码
+                Console.WriteLine($"成员{member.Name}的类型是,{member.MemberType}");
+            }
+        }
+    }
+}
+
+
